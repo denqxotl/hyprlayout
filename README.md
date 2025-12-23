@@ -5,3 +5,20 @@ I'm building my shell using Quickshell and there was no easy way to get current 
 
 ## Why do I need it? 
 Because I don't want to have two Processes in quickshell for startup and for sock2 changes listener.
+
+
+## Quickshell example
+
+```qml
+Process {
+    id: layoutProcess
+    command: ['sh', '-c', 'hyprlayout']
+    running: true
+    stdout: SplitParser {
+        id: layoutParser
+        onRead: data => {
+            keyboardLayout.currentLayout = data.toString().trim();
+        }
+    }
+}
+```
